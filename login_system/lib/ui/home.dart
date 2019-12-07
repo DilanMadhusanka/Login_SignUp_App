@@ -11,12 +11,18 @@ class _HomeState extends State<Home> {
 
   final TextEditingController _userNameController = new TextEditingController();
   final TextEditingController _passwordController = new TextEditingController();
+  Map results;
+  Widget erMessage;
 
   Future _goToNextScreen(BuildContext context) async {
-    Map results = await Navigator.of(context).push(
+    results = await Navigator.of(context).push(
       new MaterialPageRoute(
         builder: (BuildContext context) {
-          return new NextScreen();
+          if(_userNameController.text == 'Flutter' && _passwordController.text == 'dart') {
+            return new NextScreen();
+          }
+            erMessage = error();
+            return erMessage;
         }
       )
     );
@@ -32,9 +38,10 @@ class _HomeState extends State<Home> {
       body: new Container(
         child: new ListView(
           children: <Widget>[
+            new Padding(padding: const EdgeInsets.only(top: 40.2),),
             new Image.asset(
               'images/smoke.png',
-              height: 100.0,
+              height: 120.0,
               width: 75.0,
             ),
             new Padding(padding: const EdgeInsets.all(10.0),),
@@ -78,6 +85,9 @@ class _HomeState extends State<Home> {
                         ),
                       ),
                     ),
+                  ),
+                  new Container(
+                    child: erMessage,
                   )
                 ],
               ),
@@ -87,4 +97,11 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
+  Widget error() {
+    return new ListTile(
+      title: new Text("Wrong Password!"),
+    );
+  }
+
 }
