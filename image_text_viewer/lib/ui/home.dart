@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_text_viewer/ui/user_input_section.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -17,7 +18,18 @@ class Home extends StatelessWidget {
           )
         ),
         child: Column(
-          
+          children: <Widget>[
+            Padding(padding: const EdgeInsets.only(top: 60.0),),
+            Center(
+              child: Image.asset('images/group.png',
+                width: 80.0,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(top: 20.0),
+              //child: UserInputSection(),
+            )
+          ],
         ),
       ),
     );
