@@ -1,11 +1,42 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-class Home extends StatelessWidget {
-  
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+// import 'package:shared_preferences/shared_preferences.dart';
+
+import 'loggedPage.dart';
+
+
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   TextStyle style = TextStyle(fontFamily: 'Montserrat', fontSize: 20.0);
+
+
+  void login(String email, String password) async {
+
+//-----------------------------------------------------------------//
+
+    var url = 'http://192.168.1.101:8080/login';
+    var response = await http.post(url, body: json.encode({'email': email, 'password': password}),
+      headers: {
+            "Content-Type": "application/json"
+          },
+    );
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+
+//--------------------------------------------------//
+
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -77,8 +108,9 @@ class Home extends StatelessWidget {
                       color: Colors.grey,
                       onPressed: () {
                         if (_formKey.currentState.validate()) {
-                          print(_emailController.text);
-                          print(_passwordController.text);
+                          // print(_emailController.text);
+                          // print(_passwordController.text);
+                          login(_emailController.text, _passwordController.text);
                         }
                       },
                       child: Text('Login',
@@ -96,4 +128,23 @@ class Home extends StatelessWidget {
       ),
     );
   }
-}
+  }
+
+
+// class Home extends StatelessWidget {
+  
+  
+//   String url = 'http://localhost:8080/users/auth/{username}/{password}';
+
+//   // Future<String> login(String email, String passsword) async {
+//   //   var response = await http.get(Uri.encodeFull(url), headers:{"Accept" : "application/json"});
+//   //   return
+//   // }
+
+//   @override
+//   Widget build(BuildContext context) {
+    
+// }
+
+
+// http://192.168.1.101:8080/login
