@@ -2,9 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-// import 'package:shared_preferences/shared_preferences.dart';
-
-import 'loggedPage.dart';
+import 'package:image_text_viewer/ui/home_page.dart';
 
 
 class Home extends StatefulWidget {
@@ -30,8 +28,10 @@ class _HomeState extends State<Home> {
             "Content-Type": "application/json"
           },
     );
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+
+    if(response.body == 'true') {
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> ImageUploading()));
+    }
 
 //--------------------------------------------------//
 
