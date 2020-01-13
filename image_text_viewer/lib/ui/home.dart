@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
           },
     );
 
-    if(response.body == 'true') {
+    if(response.body == 'false') {
       Navigator.push(context, MaterialPageRoute(builder: (context)=> ImageUploading()));
     }
 
