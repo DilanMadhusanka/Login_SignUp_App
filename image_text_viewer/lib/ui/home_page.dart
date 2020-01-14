@@ -10,12 +10,25 @@ class ImageUploading extends StatefulWidget {
 
 class _ImageUploadingState extends State<ImageUploading> {
 
-  File file;
+  File _image;
 
-  void _choose() async {
-    file = await ImagePicker.pickImage(source: ImageSource.gallery);
-    print(file);
+  Future cameraImage() async {
+  var image = await ImagePicker.pickImage(
+    source: ImageSource.gallery,
+    maxHeight: 240.0,
+    maxWidth: 240.0,
+  );
+
+  setState(() {
+    _image = image;
+  });
+}
+
+Widget showImage() {
+  if(_image != null) {
+    return Image.file(_image,);
   }
+}
 
 
   @override
@@ -26,12 +39,18 @@ class _ImageUploadingState extends State<ImageUploading> {
         centerTitle: true,
       ),
       body: Container(
-        child: Row(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             RaisedButton(
-              onPressed: _choose,
+              onPressed: cameraImage,
               child: Text('Choose Image'),
+            ),
+            Center(
+              child: Container(
+                width: 200.0,
+                child: showImage()
+              )
             )
           ],
         ),
