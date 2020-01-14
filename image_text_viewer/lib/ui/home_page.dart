@@ -28,6 +28,7 @@ Widget showImage() {
   if(_image != null) {
     return Image.file(_image,);
   }
+  return null;
 }
 
 
@@ -40,18 +41,35 @@ Widget showImage() {
       ),
       body: Container(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            RaisedButton(
-              onPressed: cameraImage,
-              child: Text('Choose Image'),
-            ),
+            Padding(padding: const EdgeInsets.only(top: 50.0),),
             Center(
               child: Container(
-                width: 200.0,
                 child: showImage()
               )
-            )
+            ),
+            const SizedBox(height: 30),
+            RaisedButton(
+              onPressed: cameraImage,
+              textColor: Colors.white,
+              padding: const EdgeInsets.all(0.0),
+              child: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: <Color>[
+                      Color(0xFF0D47A1),
+                      Color(0xFF1976D2),
+                      Color(0xFF42A5F5),
+                    ],
+                  ),
+                ),
+                padding: const EdgeInsets.all(10.0),
+                child: const Text(
+                  'Gradient Button',
+                  style: TextStyle(fontSize: 20)
+                ),
+              ),
+            ),
           ],
         ),
       ),
