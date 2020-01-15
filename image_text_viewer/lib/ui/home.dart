@@ -33,7 +33,7 @@ class _HomeState extends State<Home> {
       Navigator.push(context, MaterialPageRoute(builder: (context)=> ImageUploading()));
     }
 
-//--------------------------------------------------//
+//------------------------------------------------------------------//
 
 }
 
@@ -108,8 +108,6 @@ class _HomeState extends State<Home> {
                       color: Colors.grey,
                       onPressed: () {
                         if (_formKey.currentState.validate()) {
-                          // print(_emailController.text);
-                          // print(_passwordController.text);
                           login(_emailController.text, _passwordController.text);
                         }
                       },
@@ -129,22 +127,3 @@ class _HomeState extends State<Home> {
     );
   }
   }
-
-
-// class Home extends StatelessWidget {
-  
-  
-//   String url = 'http://localhost:8080/users/auth/{username}/{password}';
-
-//   // Future<String> login(String email, String passsword) async {
-//   //   var response = await http.get(Uri.encodeFull(url), headers:{"Accept" : "application/json"});
-//   //   return
-//   // }
-
-//   @override
-//   Widget build(BuildContext context) {
-    
-// }
-
-
-// http://192.168.1.101:8080/login

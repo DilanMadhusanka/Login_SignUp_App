@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 class ImageUploading extends StatefulWidget {
   @override
@@ -24,12 +26,25 @@ class _ImageUploadingState extends State<ImageUploading> {
   });
 }
 
-Widget showImage() {
-  if(_image != null) {
-    return Image.file(_image,);
+  Widget showImage() {
+    if(_image != null) {
+      return Image.file(_image,);
+    }
+    return null;
   }
-  return null;
-}
+
+  _upload() async {
+    // var url = 'http://192.168.1.101:8080/read';
+    var request = new http.MultipartRequest("POST", new Uri.http('http://192.168.1.101:8080', '/read'));
+    request.files.add(http.MultipartFile.fromBytes(
+      'filePath',
+      await _image.readAsBytes()
+    ));
+    request.send().then((response) {
+      if (response.statusCode == 200) print("Uploaded!");
+    });
+
+  }
 
 
   @override
@@ -70,6 +85,10 @@ Widget showImage() {
                 ),
               ),
             ),
+            RaisedButton(
+              onPressed: _upload,
+              child: Text('Upload'),
+            )
           ],
         ),
       ),
